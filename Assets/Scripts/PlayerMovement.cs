@@ -4,37 +4,46 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float torqueAmount = 1f;
+    public float torqueAmount = 5f;
     public float jumpForce = 8f;
+ //   public float airSpeed = 1.5f;
 
     private Rigidbody2D rb2d;
-    public bool isGrounded = false;
+    private SpriteRenderer sr;
+    public ParticleSystem DeathP; 
+    private bool isGrounded = false;
 
     public float rayDistance = 10f;
 
-    public bool canJump = true;
+    private bool canJump = true;
+    private bool DeathDelayOn;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>() as Rigidbody2D;
+        sr = GetComponent<SpriteRenderer>();
         rb2d.bodyType = RigidbodyType2D.Dynamic;
+        DontDestroyOnLoad(this.gameObject);
     }
 
-    void Awake()
-    {
-    }
 
     void FixedUpdate()
     {
         Move();
         CheckGrounded();
-        Jump();   
+        Jump();
+        CheckDeath();   
     }
 
     void Move()
     {
         float direction = Input.GetAxisRaw("Rotation");
-        rb2d.AddTorque(direction * torqueAmount);
+        rb2d.AddTorque(direction * torqueAmount );
+        if(!isGrounded)
+        {
+ //           Vector2 airMovement = new Vector2(direction, 0f) * airSpeed * -1;
+ //           rb2d.AddForce(airMovement);
+        }
     }
 
     void CheckGrounded()
@@ -68,12 +77,43 @@ public class PlayerMovement : MonoBehaviour
     {
         float YSpeed = rb2d.velocity.y;
 
-        if(isGrounded && canJump && YSpeed >= 0 && Input.GetButton ("Jump"))
+        if(isGrounded && canJump && YSpeed >= -5 && Input.GetButton ("Jump"))
         {
             rb2d.AddForce(Vector3.up * jumpForce);
 
             StartCoroutine(JumpCoolDown());
         }
+    }
+
+    void CheckDeath()
+    {
+        if(transform.position.y < -30 && !DeathDelayOn)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        StartCoroutine (DeathDelay());
+    }
+
+    IEnumerator DeathDelay()
+    {
+       sr.enabled = false;
+       DeathDelayOn = true;
+       DeathP.Play();
+       yield return new WaitForSeconds(1.2f);
+       sr.enabled = true;   
+       transform.position = new Vector3(0,0,0);
+       rb2d.velocity = new Vector3(0,0,0);
+       DeathDelayOn = false;
+       StopCoroutine (DeathDelay());
+    }
+
+    public void OnSceneLoaded()
+    {
+        transform.position = new Vector3(0,0,0);
     }
 
 }   
