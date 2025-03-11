@@ -2253,6 +2253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dafd48115fe82546b4970f98feefc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelWinInstance: {fileID: 0}
+  ResetPosition: {fileID: 1706424840}
   Running: 0
 --- !u!4 &1035621737
 Transform:
@@ -3388,7 +3390,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.39, y: 0.39, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3405,7 +3407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a012e8cbb391d643915154a934bdbe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torqueAmount: 75
+  torqueAmount: 100
   jumpForce: 2000
   DeathP: {fileID: 1706424844}
   rayDistance: 0.6
@@ -3422,8 +3424,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 0.1
-  m_AngularDrag: 5
+  m_LinearDrag: 0.01
+  m_AngularDrag: 3
   m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: 6b515a124b31c764ba2b14dbb240f7d3, type: 2}
   m_IncludeLayers:

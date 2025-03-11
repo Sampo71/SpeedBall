@@ -33,6 +33,7 @@ public class SceneSwap : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ResetPosition.OnSceneLoaded();
         SceneManager.LoadScene("Level " + LevelWinInstance.WarpToLevel);
+        LevelWinInstance = FindObjectOfType<LevelWin>();
         Running = false;
         StopCoroutine("WinTimer");
     }
