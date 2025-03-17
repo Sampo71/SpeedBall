@@ -31,8 +31,9 @@ public class SceneSwap : MonoBehaviour
     {
         Running = true; 
         yield return new WaitForSeconds(1f);
-        ResetPosition.OnSceneLoaded();
         SceneManager.LoadScene("Level " + LevelWinInstance.WarpToLevel);
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "Level " + LevelWinInstance.WarpToLevel);
+        ResetPosition.OnSceneLoaded();
         LevelWinInstance = FindObjectOfType<LevelWin>();
         Running = false;
         StopCoroutine("WinTimer");

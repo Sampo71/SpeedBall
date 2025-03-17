@@ -168,6 +168,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flag
       objectReference: {fileID: 0}
+    - target: {fileID: 1494262400889289978, guid: 4bf4dfe13e5f6bc44aad81f688f5f754, type: 3}
+      propertyPath: WarpToLevel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7575030991283205034, guid: 4bf4dfe13e5f6bc44aad81f688f5f754, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.661308
