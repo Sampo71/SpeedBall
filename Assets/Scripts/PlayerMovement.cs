@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float torqueAmount = 5f;
     public float jumpForce = 8f;
- //   public float airSpeed = 1.5f;
+    public float airSpeed = 15f;
 
     private Rigidbody2D rb2d;
     private SpriteRenderer sr;
@@ -41,8 +41,11 @@ public class PlayerMovement : MonoBehaviour
         rb2d.AddTorque(direction * torqueAmount );
         if(!isGrounded)
         {
- //           Vector2 airMovement = new Vector2(direction, 0f) * airSpeed * -1;
- //           rb2d.AddForce(airMovement);
+            if((direction < 0 && rb2d.velocity.x < 0) || (direction > 0 && rb2d.velocity.x > 0)){
+
+               Vector2 airMovement = new Vector2(direction, 0f) * airSpeed * -1;
+               rb2d.AddForce(airMovement);
+            }
         }
     }
 
@@ -104,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
        DeathDelayOn = true;
        DeathP.Play();
        yield return new WaitForSeconds(1.2f);
-       sr.enabled = true;   
+       sr.enabled = true;  
        transform.position = new Vector3(0,0,0);
        rb2d.velocity = new Vector3(0,0,0);
        DeathDelayOn = false;
