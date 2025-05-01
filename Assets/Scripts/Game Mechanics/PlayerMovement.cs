@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float torqueAmount = 5f;
-    public float jumpForce = 8f;
-    public float airSpeed = 15f;
+    public float torqueAmount;
+    public float jumpForce;
+    public float airSpeed;
 
     private Rigidbody2D rb2d;
     private SpriteRenderer sr;
     public ParticleSystem DeathP; 
     private bool isGrounded = false;
 
-    public float rayDistance = 10f;
+    public float rayDistance;
 
     private bool canJump = true;
     private bool DeathDelayOn;
